@@ -1,6 +1,4 @@
-# Animals
-
-### Words-Booster-iOS-TestTask
+# Words-Booster-iOS-TestTask
 ### Coding challenge for iOS Engineers.
 
 Write a simple application that allows users to see a list of animal categories and read interesting facts about them. You should provide your solution as a link to a public repository on any git hosting service you prefer: GitHub, GitLab, Bitbucket. Please make commits of logical units to evaluate your progress and add comments as you see fit.

@@ -214,5 +214,12 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/2/2b/WelshCorgi.jpeg",
     "status": "paid",
     "order": 3
+  },
+  {
+    "title": "Fox 🦊",
+    "description": "What Does the Fox Say? :)",
+    "image": "https://toppng.com/uploads/preview/fox-115385926094eikzv9ahw.png",
+    "status": "coming soon",
+    "order": 0
   }
 ]

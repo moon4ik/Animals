@@ -14,8 +14,7 @@ class RootController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let vc = UIViewController()
-        vc.view.backgroundColor = .red
+        let vc = CategoryScreenBuilder.build()
         transit(to: vc)
     }
     
