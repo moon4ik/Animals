@@ -1,0 +1,218 @@
+[
+  {
+    "title": "Dogs 🐕",
+    "description": "Different facts about dogs",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/2/2b/WelshCorgi.jpeg",
+    "order": 2,
+    "status": "paid",
+    "content": [
+      {
+        "fact": "During the Renaissance, detailed portraits of the dog as a symbol of fidelity and loyalty appeared in mythological, allegorical, and religious art throughout Europe, including works by Leonardo da Vinci, Diego Velázquez, Jan van Eyck, and Albrecht Durer.",
+        "image": "https://images.dog.ceo/breeds/basenji/n02110806_4150.jpg"
+      },
+      {
+        "fact": "The Mayans and Aztecs symbolized every tenth day with the dog, and those born under this sign were believed to have outstanding leadership skills.",
+        "image": "https://images.dog.ceo/breeds/cotondetulear/100_2397.jpgt"
+      },
+      {
+        "fact": "If never spayed or neutered, a female dog, her mate, and their puppies could produce over 66,000 dogs in 6 years!",
+        "image": "https://images.dog.ceo/breeds/puggle/IMG_075427.jpg"
+      },
+      {
+        "fact": "Three dogs survived the sinking of the Titanic: a Newfoundland, a Pomeranian, and a Pekingese.",
+        "image": "https://images.dog.ceo/breeds/schnauzer-giant/n02097130_3359.jpg"
+      },
+      {
+        "fact": "France has the 2nd highest dog population.",
+        "image": "https://images.dog.ceo/breeds/bullterrier-staffordshire/n02093256_3994.jpg"
+      },
+      {
+        "fact": "It’s been demonstrated that dogs can reduce both physical and emotional anxiety.",
+        "image": "https://images.dog.ceo/breeds/otterhound/n02091635_426.jpg"
+      },
+      {
+        "fact": "Chocolate contains a substance known as theobromine (similar to caffeine) which can kill dogs or, at the very least, make them violently ill.",
+        "image": "https://images.dog.ceo/breeds/akita/Akita_Inu_dog.jpg"
+      },
+      {
+        "fact": "Scholars have argued over the metaphysical interpretation of Dorothy’s pooch, Toto, in the Wizard of Oz. One theory postulates that Toto represents Anubis, the dog-headed Egyptian god of death, because Toto consistently keeps Dorothy from safely returning home.",
+        "image": "https://images.dog.ceo/breeds/terrier-kerryblue/n02093859_2526.jpg"
+      },
+      {
+        "fact": "Average body temperature for a dog is 101.2 degrees.",
+        "image": "https://images.dog.ceo/breeds/mastiff-tibetan/n02108551_1689.jpg"
+      },
+      {
+        "fact": "Dogs often bury bones so that they can dig them up at some moment in the future when they are hungry.",
+        "image": "https://images.dog.ceo/breeds/greyhound-italian/n02091032_6979.jpg"
+      },
+      {
+        "fact": "Smaller breeds mature faster than larger breeds.",
+        "image": "https://images.dog.ceo/breeds/terrier-patterdale/320px-05078045_Patterdale_Terrier.jpg"
+      },
+      {
+        "fact": "Newfoundlands are great swimmers because of their webbed feet.",
+        "image": "https://images.dog.ceo/breeds/terrier-irish/n02093991_3300.jpg"
+      },
+      {
+        "fact": "Thomas Jefferson helped enact a dog tax in Virginia, because he was annoyed that dogs were killing his sheep.",
+        "image": "https://images.dog.ceo/breeds/cotondetulear/IMAG1063.jpg"
+      },
+      {
+        "fact": "Puppies have 28 teeth and adult dogs have 42.",
+        "image": "https://images.dog.ceo/breeds/dhole/n02115913_1273.jpg"
+      },
+      {
+        "fact": "Wow, check out those choppers! Puppies have 28 teeth and normal adult dogs have 42.",
+        "image": "https://images.dog.ceo/breeds/appenzeller/n02107908_5662.jpg"
+      },
+      {
+        "fact": "The most popular breed of domestic dog in the US and the UK is the Labrador Retriever.",
+        "image": "https://images.dog.ceo/breeds/mastiff-bull/n02108422_5401.jpg"
+      }
+    ]
+  },
+  {
+    "title": "Dragons 🐉",
+    "description": "Dragons not real, but beautiful :) ",
+    "image": "https://static.wikia.nocookie.net/monster/images/6/6e/DragonRed.jpg/",
+    "status": "paid",
+    "order": 4
+  },
+  {
+    "title": "Cats 🐈",
+    "description": "Different facts about cats",
+    "image": "https://images6.alphacoders.com/337/337780.jpg",
+    "status": "free",
+    "order": 1,
+    "content": [
+      {
+        "fact": "A cat cannot see directly under its nose.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "When a cat drinks, its tongue - which has tiny barbs on it - scoops the liquid up backwards.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "The cat's clavicle, or collarbone, does not connect with other bones but is buried in the muscles of the shoulder region. This lack of a functioning collarbone allows them to fit through any opening the size of their head.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "In 1987, cats overtook dogs as the number one pet in America (about 50 million cats resided in 24 million homes in 1986). About 37% of American homes today have at least one cat.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "A cat named Dusty, aged 1 7, living in Bonham, Texas, USA, gave birth to her 420th kitten on June 23, 1952.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "Most cats had short hair until about 100 years ago, when it became fashionable to own cats and experiment with breeding.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "Cats prefer to remain non-confrontational. They will not fight to show dominance, but rather to stake their territory. Cats will actually go to extremes to avoid one another in order to prevent a possible confrontation.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "The largest breed of cat is the Ragdoll with males weighing in at 1 5 to 20 lbs. The heaviest domestic cat on record was a neutered male tabby named Himmy from Queensland, Australia who weighed 46 lbs. 1 5 oz.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "Two members of the cat family are distinct from all others: the clouded leopard and the cheetah. The clouded leopard does not roar like other big cats, nor does it groom or rest like small cats. The cheetah is unique because it is a running cat; all others are leaping cats. They are leaping cats because they slowly stalk their prey and then leap on it.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "The average cat can jump 8 feet in a single bound, nearly six times its body length!",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "A group of cats is called a 'clowder'.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "A cat has the power to sometimes heal themselves by purring. A domestic cat's purr has a frequency of between 25 and 150 Hertz, which happens to be the frequency at which muscles and bones best grow and repair themselves. ",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "Female cats tend to be right pawed, while male cats are more often left pawed. Interestingly, while 90% of humans are right handed, the remaining 10% of lefties also tend to be male.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "The ability of a cat to find its way home is called “psi-traveling.” Experts think cats either use the angle of the sunlight to find their way or that cats have magnetized cells in their brains that act as compasses.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "Blue-eyed, white cats are often prone to deafness.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "The tiniest cat on record is Mr. Pebbles, a 2-year-old cat that weighed 3 lbs (1.3 k) and was 6.1 inches (15.5 cm) high.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "It has been scientifically proven that stroking a cat can lower one's blood pressure.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "Milk can give some cats diarrhea.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "Purring does not always indicate that a cat is happy and healthy - some cats will purr loudly when they are terrified or in pain.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "In 1987 cats overtook dogs as the number one pet in America.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "The term “puss” is the root of the principal word for “cat” in the Romanian term pisica and the root of secondary words in Lithuanian (puz) and Low German puus. Some scholars suggest that “puss” could be imitative of the hissing sound used to get a cat’s attention. As a slang word for the female pudenda, it could be associated with the connotation of a cat being soft, warm, and fuzzy.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "The earliest ancestor of the modern cat lived about 30 million years ago. Scientists called it the Proailurus, which means “first cat” in Greek. The group of animals that pet cats belong to emerged around 12 million years ago.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "The first cat show was in 1871 at the Crystal Palace in London.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "The technical term for a cat’s hairball is a 'bezoar'.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "A female cat will be pregnant for approximately 9 weeks or between 62 and 65 days from conception to delivery.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "The biggest wildcat today is the Siberian Tiger. It can be more than 12 feet (3.6 m) long (about the size of a small car) and weigh up to 700 pounds (317 kg).",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "The cat appears to be the only domestic companion animal not mentioned in the Bible.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "Cats have 32 muscles that control the outer ear (humans have only 6). A cat can independently rotate its ears 180 degrees.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "The silks created by weavers in Baghdad were inspired by the beautiful and varied colors and markings of cat coats. These fabrics were called 'tabby' by European traders.",
+        "image": "https://cataas.com/cat"
+      },
+      {
+        "fact": "Unlike humans, cats do not need to blink their eyes on a regular basis to keep their eyes lubricated.",
+        "image": "https://cataas.com/cat"
+      }
+    ]
+  },
+  {
+    "title": "Pandas 🐼",
+    "description": "Different facts about pandas",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/2/2b/WelshCorgi.jpeg",
+    "status": "paid",
+    "order": 3
+  }
+]
