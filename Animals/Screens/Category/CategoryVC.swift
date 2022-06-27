@@ -25,13 +25,27 @@ class CategoryVC: UIViewController, CategoryVCProtocol {
         super.viewDidLoad()
         setupView()
         setupLayout()
-        presenter.fetchCategories()
+        DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(2)) { [weak self] in
+            self?.presenter.fetchCategories()
+        }
+        
     }
     
-    //MARK: - Setup
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        super.viewWillAppear(animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        super.viewWillDisappear(animated)
+    }
+    
+    //MARK: setup
     
     private func setupView() {
         view.backgroundColor = .appBg
+
         tableView.backgroundColor = .clear
         tableView.delegate = self
         tableView.dataSource = self
@@ -41,9 +55,11 @@ class CategoryVC: UIViewController, CategoryVCProtocol {
                            forCellReuseIdentifier: CategoryPaidCell.className)
         tableView.register(CategoryComingSoonCell.self,
                            forCellReuseIdentifier: CategoryComingSoonCell.className)
+        
         indicator.style = .medium
         indicator.color = .white
         indicator.hidesWhenStopped = true
+        indicator.startAnimating()
     }
     
     private func setupLayout() {
@@ -59,7 +75,6 @@ class CategoryVC: UIViewController, CategoryVCProtocol {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        view.layoutIfNeeded()
     }
     
     //MARK: protocol

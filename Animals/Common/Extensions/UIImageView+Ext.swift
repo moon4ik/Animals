@@ -8,32 +8,43 @@
 import Foundation
 import UIKit
 
-let imageCache = NSCache<NSString, UIImage>()
-
 extension UIImageView {
-    
-    func loadImage(url urlString: String) {
+        
+    func loadFrom(link urlString: String) {
         self.image = nil
         guard let url = URL(string: urlString) else { return }
-        if let cachedImage = imageCache.object(forKey: urlString as NSString)  {
-            self.image = cachedImage
-            return
-        }
+        // indicator
         let indicator = UIActivityIndicatorView(style: .medium)
         addSubview(indicator)
+        indicator.color = .appBg
         indicator.startAnimating()
-        indicator.center = self.center
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            indicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        ])
+        // download
+        let request = URLRequest(
+            url: url,
+            cachePolicy: .returnCacheDataElseLoad,
+            timeoutInterval: 15
+        )
         let dataTask = URLSession.shared.dataTask(
-            with: url,
-            completionHandler: { [weak self] (data, _, error) in
-                guard error == nil, let data = data, let image = UIImage(data: data) else {
+            with: request,
+            completionHandler: { [weak self] (data, response, error) in
+                guard
+                    let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                    let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                    let data = data, error == nil,
+                    let image = UIImage(data: data)
+                else {
                     DispatchQueue.main.async {
+                        self?.image = .placeholder
                         indicator.removeFromSuperview()
                     }
                     return
                 }
                 DispatchQueue.main.async {
-                    imageCache.setObject(image, forKey: urlString as NSString)
                     self?.image = image
                     indicator.removeFromSuperview()
                 }

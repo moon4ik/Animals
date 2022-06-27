@@ -19,34 +19,40 @@ protocol CategoryPresenterProtocol {
 class CategoryPresenter: CategoryPresenterProtocol {
     
     private weak var view: CategoryVCProtocol!
-    private let router: Routable
+    private let router: CategoryRouterProtocol
     private let dataSource: DataSourceProtocol
     
     private var categories = Categories()
     
-    required init(vc: CategoryVCProtocol, router: Routable, dataSource: DataSourceProtocol) {
+    required init(vc: CategoryVCProtocol, router: CategoryRouterProtocol, dataSource: DataSourceProtocol) {
         self.view = vc
         self.router = router
         self.dataSource = dataSource
     }
     
     func fetchCategories() {
-        view.showLoading()
+        DispatchQueue.main.async {
+            self.view.showLoading()
+        }
         let result = dataSource.loadData()
         switch result {
         case .success(let categories):
-            self.categories = categories.sorted(by: < )
             self.categories = categories
             self.categories.sort()
-            self.view.update()
+            DispatchQueue.main.async {
+                self.view.hideLoading()
+                self.view.update()
+            }
         case .failure(let error):
-            router.showInfoAlert(
-                title: "Attention",
-                message: error.localizedDescription,
-                seconds: 3
-            )
+            DispatchQueue.main.async {
+                self.view.hideLoading()
+                self.router.showInfoAlert(
+                    title: "Attention",
+                    message: error.localizedDescription,
+                    seconds: 2
+                )
+            }
         }
-        view.hideLoading()
     }
     
     func numberOfRows() -> Int {
@@ -64,7 +70,7 @@ class CategoryPresenter: CategoryPresenterProtocol {
         let status = category.status
         let isPaid = (status == .paid)
         let paidImage: UIImage? = isPaid ? .lockIcon : nil
-        let paidTitle: String? = isPaid ? "Premium".localized() : nil
+        let paidTitle: String? = isPaid ? "Premium" : nil
         let isComingSoon = (status == .comingSoon)
         let comingSoonImage: UIImage? = isComingSoon ? .comingSoonIcon : nil
         let overlayColor: UIColor? = isComingSoon ? UIColor.black.withAlphaComponent(0.6) : nil
@@ -83,13 +89,30 @@ class CategoryPresenter: CategoryPresenterProtocol {
     
     func didSelectRow(at indexPath: IndexPath) {
         let category = categories[indexPath.row]
+        let isFactsPresent = category.content.count > 0
         switch category.status {
         case .free:
-            print("open")
+            if isFactsPresent {
+                router.showFacts(category: category)
+            } else {
+                router.showInfoAlert(
+                    title: "Oops...",
+                    message: "We don't know any facts about \(category.title)",
+                    seconds: 2
+                )
+            }
         case .paid:
-            print("Show Ads and open")
+            if isFactsPresent {
+                router.showAds(category: category)
+            } else {
+                router.showInfoAlert(
+                    title: "Oops...",
+                    message: "We don't know any facts about \(category.title)",
+                    seconds: 2
+                )
+            }
         case .comingSoon:
-            print("Show alert")
+            router.showComingSoon(message: category.title)
         }
     }
 }

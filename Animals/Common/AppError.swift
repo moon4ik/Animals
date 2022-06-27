@@ -9,5 +9,7 @@ import Foundation
 
 enum AppError: Error {
     case invalidURL
+    case invalidImage
+    case cancelled
     case with(message: String)
 }

@@ -17,7 +17,8 @@ class CategoryScreenBuilder {
         let source = DataSource(url: url)
         let presenter = CategoryPresenter(vc: vc, router: router, dataSource: source)
         vc.presenter = presenter
-        return vc
+        let nc = UINavigationController(rootViewController: vc)
+        return nc
     }
     
 }

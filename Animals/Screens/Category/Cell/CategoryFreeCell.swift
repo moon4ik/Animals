@@ -15,7 +15,7 @@ class CategoryFreeCell: UITableViewCell {
     let titleLabel = UILabel()
     let subtitleLabel = UILabel()
     
-    //MARK: - init
+    //MARK: init
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -86,7 +86,7 @@ class CategoryFreeCell: UITableViewCell {
     //MARK: public
     
     public func setup(_ vm: CategoryCellVM) {
-        imgView.loadImage(url: vm.imageURL)
+        imgView.loadFrom(link: vm.imageURL)
         titleLabel.text = vm.title
         subtitleLabel.text = vm.subtitle
     }

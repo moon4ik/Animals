@@ -33,7 +33,7 @@ final class DataSource: DataSourceProtocol {
         }
     }
     
-    //MARK: -
+    //MARK: decode generic
     
     private func decode<T: Decodable>(_ type: T.Type, from data: Data) throws -> T {
         do {

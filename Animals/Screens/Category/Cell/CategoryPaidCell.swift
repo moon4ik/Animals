@@ -108,7 +108,7 @@ class CategoryPaidCell: UITableViewCell {
     //MARK: public
     
     public func setup(_ vm: CategoryCellVM) {
-        imgView.loadImage(url: vm.imageURL)
+        imgView.loadFrom(link: vm.imageURL)
         titleLabel.text = vm.title
         subtitleLabel.text = vm.subtitle
         paidImgView.image = vm.paidImage

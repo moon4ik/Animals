@@ -38,8 +38,6 @@ class CategoryComingSoonCell: UITableViewCell {
     
     //MARK: setup
     
-    //MARK: setup
-    
     private func setupView() {
         backgroundColor = .clear
         contentView.addSubview(cardView)
@@ -110,7 +108,7 @@ class CategoryComingSoonCell: UITableViewCell {
     //MARK: public
     
     public func setup(_ vm: CategoryCellVM) {
-        imgView.loadImage(url: vm.imageURL)
+        imgView.loadFrom(link: vm.imageURL)
         titleLabel.text = vm.title
         subtitleLabel.text = vm.subtitle
         comingSoonImage.image = vm.comingSoonImage
