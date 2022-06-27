@@ -24,9 +24,10 @@ extension UIImageView {
             indicator.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
         // download
+        let cachePolicy: URLRequest.CachePolicy = url.pathExtension.isEmpty ? .reloadRevalidatingCacheData : .returnCacheDataElseLoad
         let request = URLRequest(
             url: url,
-            cachePolicy: .returnCacheDataElseLoad,
+            cachePolicy: cachePolicy,
             timeoutInterval: 15
         )
         let dataTask = URLSession.shared.dataTask(
