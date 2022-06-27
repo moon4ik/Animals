@@ -10,20 +10,19 @@ import UIKit
 
 protocol FactsVCProtocol: AnyObject {
     func setup(title: String)
-    func setup(vm: FactVM)
+    func reloadData()
+    func select(indexPath: IndexPath)
+    func prevBtn(isEnabled: Bool)
+    func nextBtn(isEnabled: Bool)
 }
 
 class FactsVC: UIViewController, FactsVCProtocol {
     
     var presenter: FactsPresenterProtocol!
     private let cardView = UIView()
-    private let imgView = UIImageView()
-    private let textView = UITextView()
+    private var collectionView: UICollectionView!
     private let prevBtn = UIButton()
     private let nextBtn = UIButton()
-    private let indicator = UIActivityIndicatorView(style: .medium)
-    private var gestureBeganPoint: CGPoint = .zero
-    private var loadImageTask: URLSessionDataTask?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,21 +62,21 @@ class FactsVC: UIViewController, FactsVCProtocol {
     private func setupView() {
         view.backgroundColor = .appBg
         
-        indicator.color = .appBg
-        indicator.hidesWhenStopped = true
-        indicator.startAnimating()
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.itemSize = CGSize(width: view.bounds.width - (16*4), height: 400)
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumLineSpacing = 0
+        flowLayout.minimumInteritemSpacing = 0
+        
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.isPagingEnabled = true
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.register(FactCell.self, forCellWithReuseIdentifier: FactCell.className)
         
         cardView.backgroundColor = .appCardBg
         cardView.corner(radius: 6)
-        
-        imgView.contentMode = .scaleAspectFit
-        
-        textView.isSelectable = false
-        textView.isEditable = false
-        textView.backgroundColor = .appCardBg
-        textView.textColor = .appTextTitle
-        textView.font = .systemFont(ofSize: 18, weight: .regular)
-        textView.textAlignment = .center
         
         prevBtn.addTarget(self, action: #selector(prevDidTap), for: .touchUpInside)
         prevBtn.isEnabled = false
@@ -86,58 +85,37 @@ class FactsVC: UIViewController, FactsVCProtocol {
         nextBtn.addTarget(self, action: #selector(nextDidTap), for: .touchUpInside)
         nextBtn.isEnabled = false
         nextBtn.setImage(.factsNextBtn, for: .normal)
-        
-
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
-        swipeLeft.direction = .left
-        self.view.addGestureRecognizer(swipeLeft)
-
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
-        swipeRight.direction = .right
-        self.view.addGestureRecognizer(swipeRight)
     }
     
     private func setupLayout() {
         view.addSubview(cardView)
-        cardView.addSubview(imgView)
-        cardView.addSubview(indicator)
-        cardView.addSubview(textView)
+        cardView.addSubview(collectionView)
         cardView.addSubview(prevBtn)
         cardView.addSubview(nextBtn)
         cardView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.translatesAutoresizingMaskIntoConstraints = false
-        indicator.translatesAutoresizingMaskIntoConstraints = false
-        textView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         prevBtn.translatesAutoresizingMaskIntoConstraints = false
         nextBtn.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            cardView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            cardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            cardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            cardView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            cardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            cardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
 
-            imgView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 14),
-            imgView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 22),
-            imgView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -22),
-            imgView.heightAnchor.constraint(equalToConstant: 240),
-
-            indicator.centerXAnchor.constraint(equalTo: imgView.centerXAnchor),
-            indicator.centerYAnchor.constraint(equalTo: imgView.centerYAnchor),
-
-            textView.topAnchor.constraint(equalTo: imgView.bottomAnchor, constant: 14),
-            textView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 22),
-            textView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -22),
-            textView.heightAnchor.constraint(greaterThanOrEqualToConstant: 100),
+            collectionView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 16),
+            collectionView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 16),
+            collectionView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -16),
+            collectionView.heightAnchor.constraint(equalToConstant: 400),
             
-            prevBtn.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 14),
-            prevBtn.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 22),
-            prevBtn.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -20),
+            prevBtn.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 16),
+            prevBtn.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 16),
+            prevBtn.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -16),
             prevBtn.widthAnchor.constraint(equalToConstant: 52),
             prevBtn.heightAnchor.constraint(equalToConstant: 52),
 
-            nextBtn.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 14),
-            nextBtn.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -22),
-            nextBtn.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -20),
+            nextBtn.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 16),
+            nextBtn.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -16),
+            nextBtn.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -16),
             nextBtn.widthAnchor.constraint(equalToConstant: 52),
             nextBtn.heightAnchor.constraint(equalToConstant: 52)
         ])
@@ -150,7 +128,12 @@ class FactsVC: UIViewController, FactsVCProtocol {
     }
     
     @objc private func shareAction() {
-        presenter.share(image: imgView.image, text: textView.text)
+        guard let cell = collectionView.visibleCells.first as? FactCell else {
+            presenter.share(image: nil, text: nil)
+            return
+        }
+        let data = cell.getData()
+        presenter.share(image: data.image, text: data.text)
     }
     
     @objc private func prevDidTap() {
@@ -161,51 +144,50 @@ class FactsVC: UIViewController, FactsVCProtocol {
         presenter.nextDidTap()
     }
     
-    @objc private func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
-        switch gesture.direction {
-        case .left:
-            presenter.nextDidTap()
-        case .right:
-            presenter.prevDidTap()
-        default:
-            break
-        }
+    //MARK: protocol
+    
+    func select(indexPath: IndexPath) {
+        self.collectionView.scrollToItem(
+            at: indexPath,
+            at: .centeredHorizontally,
+            animated: true
+        )
     }
     
-    //MARK: protocol
+    func prevBtn(isEnabled: Bool) {
+        prevBtn.isEnabled = isEnabled
+    }
+    
+    func nextBtn(isEnabled: Bool) {
+        nextBtn.isEnabled = isEnabled
+    }
     
     func setup(title: String) {
         self.title = title
     }
     
-    func setup(vm: FactVM) {
-        loadImageTask?.cancel()
-        indicator.startAnimating()
-        imgView.image = nil
-        loadImageTask = ImageLoader().loadFrom(link: vm.imgURL) { [weak self] result in
-            switch result {
-            case .success(let image):
-                DispatchQueue.main.async {
-                    self?.imgView.image = image
-                    self?.indicator.stopAnimating()
-                }
-            case .failure(let error):
-                switch error {
-                case .cancelled:
-                    DispatchQueue.main.async {
-                        self?.imgView.image = nil
-                    }
-                default:
-                    DispatchQueue.main.async {
-                        self?.imgView.image = .placeholder
-                        self?.indicator.stopAnimating()
-                    }
-                }
-            }
+    func reloadData() {
+        collectionView.reloadData()
+    }
+}
+
+extension FactsVC: UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let number = presenter.numberOfItems()
+        return number
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FactCell.className, for: indexPath) as! FactCell
+        let vm = presenter.viewModel(for: indexPath)
+        cell.setup(vm: vm)
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let indexPath = collectionView.indexPathsForVisibleItems.first {
+            presenter.select(indexPath: indexPath)
         }
-        textView.text = vm.text
-        prevBtn.isEnabled = !vm.isFirst
-        nextBtn.isEnabled = !vm.isLast
-        view.layoutIfNeeded()
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73B3EB6E2869B69300BFB560 /* FactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B3EB6D2869B69300BFB560 /* FactCell.swift */; };
 		73C52911286703A300CF29EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C52910286703A300CF29EE /* AppDelegate.swift */; };
 		73C52913286703A300CF29EE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C52912286703A300CF29EE /* SceneDelegate.swift */; };
 		73C5291A286703A400CF29EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73C52919286703A400CF29EE /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		73B3EB6D2869B69300BFB560 /* FactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactCell.swift; sourceTree = "<group>"; };
 		73C5290D286703A300CF29EE /* Animals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Animals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73C52910286703A300CF29EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73C52912286703A300CF29EE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 		73C52961286852EB00CF29EE /* Facts */ = {
 			isa = PBXGroup;
 			children = (
+				73B3EB6D2869B69300BFB560 /* FactCell.swift */,
 				73C529632868531300CF29EE /* FactsScreenBuilder.swift */,
 				73C529652868532600CF29EE /* FactsRouter.swift */,
 				73C529672868532C00CF29EE /* FactsVC.swift */,
@@ -325,6 +328,7 @@
 				73C5293328670D2E00CF29EE /* CategoryVC.swift in Sources */,
 				73C52911286703A300CF29EE /* AppDelegate.swift in Sources */,
 				73C5294F286726A300CF29EE /* ClassNameable.swift in Sources */,
+				73B3EB6E2869B69300BFB560 /* FactCell.swift in Sources */,
 				73C529662868532600CF29EE /* FactsRouter.swift in Sources */,
 				73C529572867334900CF29EE /* CategoryComingSoonCell.swift in Sources */,
 				73C5295128672DC800CF29EE /* UIImageView+Ext.swift in Sources */,

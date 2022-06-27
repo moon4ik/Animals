@@ -10,7 +10,10 @@ import UIKit
 
 protocol FactsPresenterProtocol: AnyObject {
     func populateView()
-    func share(image: UIImage?, text: String)
+    func share(image: UIImage?, text: String?)
+    func numberOfItems() -> Int
+    func viewModel(for indexPath: IndexPath) -> FactCellVM
+    func select(indexPath: IndexPath)
     func prevDidTap()
     func nextDidTap()
 }
@@ -20,13 +23,14 @@ class FactsPresenter: FactsPresenterProtocol {
     private weak var view: FactsVCProtocol!
     private let router: FactsRouterProtocol
     private let facts: Facts
-    private var current: Int = 0
+    private var currentRow: Int = 0
     private var isFirst: Bool {
-        return current == 0
+        return currentRow == 0
     }
     private var isLast: Bool {
-        return current == (facts.count-1)
+        return currentRow == (facts.count-1)
     }
+
     
     required init(vc: FactsVCProtocol, router: FactsRouterProtocol, category: CategoryModel) {
         self.view = vc
@@ -36,53 +40,64 @@ class FactsPresenter: FactsPresenterProtocol {
     }
     
     func populateView() {
-        guard let first = facts.first else {
+        view.reloadData()
+        view.prevBtn(isEnabled: !isFirst)
+        view.nextBtn(isEnabled: !isLast)
+    }
+
+    func numberOfItems() -> Int {
+        let number = facts.count
+        return number
+    }
+    
+    func viewModel(for indexPath: IndexPath) -> FactCellVM {
+        let fact = facts[indexPath.row]
+        let vm = FactCellVM(imgLink: fact.image, text: fact.fact)
+        return vm
+    }
+    
+    private func checkButtons() {
+        view.prevBtn(isEnabled: !isFirst)
+        view.nextBtn(isEnabled: !isLast)
+    }
+    
+    func select(indexPath: IndexPath) {
+        currentRow = indexPath.row
+        checkButtons()
+    }
+    
+    func share(image: UIImage?, text: String?) {
+        var items = [Any]()
+        switch (image, text) {
+        case (nil, nil):
             router.showInfoAlert(
-                title: "Attention",
-                message: "Something goes wrong",
-                seconds: 3
+                title: "Oops...",
+                message: "No data to share.",
+                seconds: 2
             )
             return
+        default:
+            if let image = image {
+                items.append(image)
+            }
+            if let text = text {
+                items.append(text)
+            }
         }
-        let vm = FactVM(
-            imgURL: first.image,
-            text: first.fact,
-            isFirst: isFirst,
-            isLast: isLast
-        )
-        view.setup(vm: vm)
+        router.share(items: items)
     }
     
     func prevDidTap() {
-        guard current-1 >= 0 else { return }
-        current -= 1
-        let fact = facts[current]
-        setupView(fact: fact)
+        guard currentRow-1 >= 0 else { return }
+        currentRow -= 1
+        view.select(indexPath: IndexPath(row: currentRow, section: 0))
+        checkButtons()
     }
     
     func nextDidTap() {
-        guard facts.count > current+1 else { return }
-        current += 1
-        let fact = facts[current]
-        setupView(fact: fact)
-    }
-    
-    private func setupView(fact: FactModel) {
-        let vm = FactVM(
-            imgURL: fact.image,
-            text: fact.fact,
-            isFirst: isFirst,
-            isLast: isLast
-        )
-        view.setup(vm: vm)
-    }
-    
-    func share(image: UIImage?, text: String) {
-        var items = [Any]()
-        if let image = image {
-            items.append(image)
-        }
-        items.append(text)
-        router.share(items: items)
+        guard facts.count > currentRow+1 else { return }
+        currentRow += 1
+        view.select(indexPath: IndexPath(row: currentRow, section: 0))
+        checkButtons()
     }
 }
